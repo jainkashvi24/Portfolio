@@ -1,0 +1,11 @@
+var $=function(s){return document.querySelector(s)};
+$('#yr').textContent=new Date().getFullYear();
+$('#burger').onclick=function(){$('#links').classList.toggle('open')};
+document.querySelectorAll('.links a').forEach(function(a){a.onclick=function(){$('#links').classList.remove('open')}});
+$('#theme').onclick=function(){var r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark'};
+var words=['Java applications','Spring Boot backends','secure web solutions','SQL-driven systems'],w=0,c=0,del=false,t=$('#typed');
+(function type(){var s=words[w];t.textContent=s.slice(0,c);if(!del&&c++===s.length){del=true;return setTimeout(type,1400)}if(del&&c--===0){del=false;w=(w+1)%words.length}setTimeout(type,del?40:80)})();
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');e.target.querySelectorAll('[data-w]').forEach(function(b){b.style.width=b.dataset.w+'%'});io.unobserve(e.target)}})},{threshold:.2});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+document.querySelectorAll('[data-n]').forEach(function(el){var n=+el.dataset.n,i=0,id=setInterval(function(){i++;el.textContent=i+'+';if(i>=n)clearInterval(id)},60)});
+$('#form').onsubmit=function(e){e.preventDefault();var f=this.querySelectorAll('input,textarea');location.href='mailto:kashvijain2409@gmail.com?subject='+encodeURIComponent('Portfolio message from '+f[0].value)+'&body='+encodeURIComponent(f[2].value+'\n\n'+f[0].value+' ('+f[1].value+')');this.style.display='none';$('#ok').style.display='block'};
